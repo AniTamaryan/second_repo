@@ -1,0 +1,17 @@
+name: Sync to Primary
+
+on:
+  push:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Push to Primary
+        run: |
+          git remote add primary git@github.com:AniTamaryan/second_repo.git 
+          git push primary HEAD:main
