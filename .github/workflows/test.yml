@@ -1,19 +1,27 @@
-name: Sync to Primary
+name: Sync Commits
 
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout first_repo
+      uses: actions/checkout@v2
+      with:
+        repository: AniTamaryan/first_repo
+        path: first_repo
 
-      - name: Push to Primary
-        run: |
-          git remote add primary git@github.com:AniTamaryan/second_repo.git 
-          git push primary HEAD:main
+    - name: Commit and Push Changes
+      run: |
+        cd repo_first
+        git config --global user.email "tamaryanani950@gmail.com"
+        git config --global user.name "AniTAmaryan"
+        git add .
+        git commit -m "Sync changes from second_repo"
+        git push
+
