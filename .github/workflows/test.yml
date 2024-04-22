@@ -18,7 +18,7 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-       cp -r  second_repo/ ../first_repo 
+        cp -rT ./ ../first_repo       
 
     - name: Commit and Push Changes
       run: |
