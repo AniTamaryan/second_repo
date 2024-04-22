@@ -16,6 +16,10 @@ jobs:
         repository: AniTamaryan/first_repo
         path: first_repo
 
+    - name: Copy Files from second_repo
+      run: |
+        cp -r ./first_repo/. ./second_repo/.
+
     - name: Commit and Push Changes
       run: |
         cd first_repo
