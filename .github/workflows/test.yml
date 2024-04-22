@@ -18,7 +18,7 @@ jobs:
 
     - name: Commit and Push Changes
       run: |
-        cd repo_first
+        cd first_repo
         git config --global user.email "tamaryanani950@gmail.com"
         git config --global user.name "AniTAmaryan"
         git add .
