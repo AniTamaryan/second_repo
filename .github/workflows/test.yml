@@ -18,13 +18,14 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-        cp -rT ./ ../first_repo       
+        cp -r ./ ../first_repo       
 
     - name: Commit and Push Changes
       run: |
-        cd first_repo
+        cd ../first_repo
         git config --global user.email "tamaryanani950@gmail.com"
         git config --global user.name "AniTAmaryan"
+        git status -s
         git add .
         git commit -m "Sync changes from second_repo"
         git push
