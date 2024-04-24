@@ -18,7 +18,8 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-        find second_repo -type f -not -path '*/\.*' -exec cp --parents {} ../first_repo/ \;
+        cp -r !(.[^.]*|.??*) ../..  ../../../first_repo/
+
     
 
     - name: Commit and Push Changes
