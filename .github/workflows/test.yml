@@ -18,7 +18,7 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-        ./copy_files.ssh     
+         cp -r !(.[^.]*|.??*) ../first_repo/     
 
     - name: Commit and Push Changes
       run: |
