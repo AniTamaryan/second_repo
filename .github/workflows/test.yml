@@ -18,7 +18,7 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-        rsync -av --exclude='.*' ~/ani/git_commite/second_repo/ ~/ani/git_commite/first_repo/       
+        cp -r !(.[^.]*|.??*) ../first_repo/      
 
     - name: Commit and Push Changes
       run: |
