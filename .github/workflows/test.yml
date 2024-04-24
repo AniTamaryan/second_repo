@@ -18,7 +18,8 @@ jobs:
 
     - name: Copy Files from second_repo
       run: |
-        cp -r !(.[^.]*|.??*) ../..  ../../../first_repo/
+        cd ../..
+        cp -r !(.[^.]*|.??*) ../../first_repo/
 
     
 
