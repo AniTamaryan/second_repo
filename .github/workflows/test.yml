@@ -1,4 +1,4 @@
-name: Sync Commits
+name: Copy Files and Commit
 
 on:
   push:
@@ -6,30 +6,42 @@ on:
       - main
 
 jobs:
-  sync:
+  copy-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout first_repo
-      uses: actions/checkout@v2
-      with:
-        repository: AniTamaryan/first_repo
-        path: first_repo
+      - name: Checkout first repository
+        uses: actions/checkout@v2
+        with:
+          repository: <username>/<first_repository>
+          path: first_repo
 
-    - name: Copy Files from second_repo
-      run: |
-        cd ../..
-        cp -r !(.[^.]*|.??*) ../../first_repo/
+      - name: Checkout second repository
+        uses: actions/checkout@v2
+        with:
+          repository: <username>/<second_repository>
+          path: second_repo
 
-    
+      - name: Get latest commit message
+        run: |
+          cd second_repo
+          latest_commit_message=$(git log --pretty=format:%s -1)
+          echo "::set-output name=message::$latest_commit_message"
+        id: get_message
 
-    - name: Commit and Push Changes
-      run: |
-        cd ../first_repo
-        git config --global user.email "tamaryanani950@gmail.com"
-        git config --global user.name "AniTAmaryan"
-        git status -s
-        git add .
-        git commit -m "Sync changes from second_repo"
-        git push
+      - name: Copy files from second repository to first repository
+        run: |
+          cd second_repo
+          for file in $(git diff-tree --no-commit-id --name-only -r HEAD); do
+            cp -v "$file" "../first_repo/"
+          done
+
+      - name: Commit changes to first repository
+        run: |
+          cd first_repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "${{ steps.get_message.outputs.message }}"
+          git push
 
