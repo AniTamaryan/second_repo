@@ -13,13 +13,13 @@ jobs:
       - name: Checkout first repository
         uses: actions/checkout@v2
         with:
-          repository: <username>/<first_repository>
+          repository: AniTamaryan/first_repo
           path: first_repo
 
       - name: Checkout second repository
         uses: actions/checkout@v2
         with:
-          repository: <username>/<second_repository>
+          repository: AniTamaryan/second_repo
           path: second_repo
 
       - name: Get latest commit message
